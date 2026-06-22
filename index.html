@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+    <title>Safety-First Expert Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        .slide-up {
+            animation: slideUp 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(102, 126, 234, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(102, 126, 234, 0.6); }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        .safety-barrier {
+            background: linear-gradient(90deg, #ff6b6b, #feca57, #48dbfb);
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
+    <!-- Header -->
+    <header class="glass-effect sticky top-0 z-50 fade-in">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+    
+                <!-- Left: Logo + Title -->
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center pulse-glow">
+                        <i class="fas fa-shield-alt text-white"></i>
+                    </div>
+                    <div>
+                        <h1 class="tanimate__animated animate__bounce">
+                            Safety-First Expert Portal
+                        </h1>
+                        
+                        <p class="text-sm text-blue-200 font-medium">
+                            Regulatory-Compliant Analysis Engine
+                        </p>
+                    </div>
+                </div>
+    
+                <!-- Center: Navigation -->
+                <nav class="hidden md:flex space-x-8 text-sm font-medium">
+                    <a href="#" class="nav-link">Home</a>
+                    <a href="features.html" class="nav-link">Features</a>
+                    <a href="about.html" class="nav-link">About</a>
+                </nav>
+    
+                <!-- Right: Status -->
+                <div class="text-sm text-gray-300 flex items-center space-x-3">
+                    <span class="hidden sm:block">
+                        <i class="fas fa-lock mr-1"></i>Strictly Informational
+                    </span>
+                </div>
+    
+            </div>
+        </div>
+    </header>
+
+    <div class="container mx-auto px-6 py-12 max-w-6xl">
+        <!-- Main Content -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Input Panel -->
+            <div class="glass-effect rounded-3xl p-8 slide-up">
+                <h2 class="text-2xl font-bold mb-6 flex items-center">
+                    <i class="fas fa-edit text-blue-400 mr-3"></i>
+                    Input Facts & Data
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-200 mb-3">Enter messy facts, documents, or case details:</label>
+                        <textarea 
+                            id="inputFacts" 
+                            rows="10"
+                            class="w-full p-5 rounded-2xl bg-white/10 border border-white/20 focus:border-blue-400 focus:outline-none focus:ring-2 focus:ring-blue-400/50 transition-all duration-300 resize-vertical text-white placeholder-gray-400"
+                            placeholder="Paste your raw data here...&#10;Example: 'Patient experienced rash after medication X. Dosage: 50mg daily. Duration: 3 weeks. Regulatory guideline FDA-2023-456 mentions similar cases...'"
+                        ></textarea>
+                    </div>
+                    
+                    <div class="safety-barrier py-3 px-6 rounded-2xl text-center font-semibold text-sm mb-6">
+                        ⚠️ <strong>IMPORTANT:</strong> This system provides <em>informational summaries only</em>. No advice or recommendations are given.
+                    </div>
+                    
+                    <button 
+                        id="analyzeBtn"
+                        class="w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-semibold py-4 px-8 rounded-2xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/25 flex items-center justify-center space-x-3 pulse-glow"
+                    >
+                        <i class="fas fa-brain"></i>
+                        <span>Generate Expert Summary</span>
+                        <div class="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" style="display: none;" id="loadingSpinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Output Panel -->
+            <div id="outputPanel" class="glass-effect rounded-3xl p-8 slide-up opacity-0 transform translate-y-10 transition-all duration-700">
+                <div id="reportContent" class="space-y-8">
+                    <!-- Dynamic report will be generated here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Safety Disclaimer -->
+        <div class="glass-effect rounded-3xl p-8 mt-12 safety-barrier">
+            <h3 class="text-xl font-bold mb-4 flex items-center">
+                <i class="fas fa-exclamation-triangle text-yellow-400 mr-3"></i>
+                Liability Protection Notice
+            </h3>
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                <div>
+                    <p class="font-semibold mb-2">✅ <strong>What this system provides:</strong></p>
+                    <ul class="space-y-1 text-gray-200">
+                        <li>• Factual categorization of input data</li>
+                        <li>• Structured summaries of information</li>
+                        <li>• Relevant regulatory references (if provided)</li>
+                        <li>• Neutral, objective analysis</li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="font-semibold mb-2">❌ <strong>What this system does NOT provide:</strong></p>
+                    <ul class="space-y-1 text-gray-200">
+                        <li>• Medical, legal, or professional advice</li>
+                        <li>• Treatment recommendations</li>
+                        <li>• Risk assessments</li>
+                        <li>• Actionable guidance</li>
+                    </ul>
+                </div>
+            </div>
+            <p class="mt-4 text-xs text-gray-300 italic">
+                Consult qualified professionals for decision-making. This tool is for informational organization only.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        class SafetyFirstExpert {
+            constructor() {
+                this.initializeEventListeners();
+            }
+
+            initializeEventListeners() {
+                const analyzeBtn = document.getElementById('analyzeBtn');
+                const inputFacts = document.getElementById('inputFacts');
+                const outputPanel = document.getElementById('outputPanel');
+                const loadingSpinner = document.getElementById('loadingSpinner');
+
+                analyzeBtn.addEventListener('click', () => {
+                    const facts = inputFacts.value.trim();
+                    if (facts) {
+                        this.generateReport(facts, outputPanel, analyzeBtn, loadingSpinner);
+                    } else {
+                        this.showError('Please enter facts/data to analyze.');
+                    }
+                });
+
+                inputFacts.addEventListener('input', () => {
+                    outputPanel.style.opacity = '0';
+                    outputPanel.classList.add('translate-y-10');
+                });
+            }
+
+            generateReport(facts, outputPanel, button, spinner) {
+                // Show loading state
+                button.disabled = true;
+                spinner.style.display = 'block';
+                button.querySelector('span').textContent = 'Analyzing...';
+
+                setTimeout(() => {
+                    const report = this.createStructuredReport(facts);
+                    this.displayReport(report, outputPanel);
+                    
+                    // Reset button
+                    button.disabled = false;
+                    spinner.style.display = 'none';
+                    button.querySelector('span').textContent = 'Generate Expert Summary';
+                    
+                    // Animate output panel
+                    outputPanel.style.opacity = '1';
+                    outputPanel.classList.remove('translate-y-10');
+                    
+                }, 2000);
+            }
+
+            createStructuredReport(facts) {
+                // Extract key information using pattern matching (production would use NLP)
+                const patterns = {
+                    medications: /(?:medication|drug|medicine)\s*[:\-]?\s*([A-Z][a-z]+(?:\s[A-Z][a-z]+)?)/gi,
+                    dosages: /(\d+(?:\.\d+)?)\s*(?:mg|mcg|g|ml|units?)/gi,
+                    durations: /(\d+(?:\.\d+)?)\s*(?:weeks?|days?|hours?|months?)/gi,
+                    symptoms: /(?:symptom|effect|reaction|experienced)\s*[:\-]?\s*([a-zA-Z\s]+)/gi,
+                    regulations: /(?:FDA|HIPAA|OSHA|regulation|guideline)[\s\-]*[:\-]?\s*([A-Z0-9\-]+)/gi
+                };
+
+                const extracted = {};
+                Object.entries(patterns).forEach(([key, pattern]) => {
+                    const matches = facts.match(pattern) || [];
+                    extracted[key] = [...new Set(matches.slice(1))];
+                });
+
+                return {
+                    timestamp: new Date().toLocaleString(),
+                    totalFacts: facts.split(/[.!?]+/).length,
+                    extracted,
+                    rawInputLength: facts.length,
+                    categories: this.categorizeFacts(facts)
+                };
+            }
+
+            categorizeFacts(facts) {
+                const categories = {
+                    'Clinical Observations': [],
+                    'Medication Information': [],
+                    'Temporal Data': [],
+                    'Regulatory References': [],
+                    'Other Observations': []
+                };
+
+                const sentences = facts.split(/[.!?]+/).filter(s => s.trim());
+
+                sentences.forEach(sentence => {
+                    const clean = sentence.toLowerCase().trim();
+                    
+                    if (clean.includes('symptom') || clean.includes('reaction') || clean.includes('effect')) {
+                        categories['Clinical Observations'].push(sentence.trim());
+                    } else if (clean.match(/(mg|mcg|g|ml|dose|dosage)/)) {
+                        categories['Medication Information'].push(sentence.trim());
+                    } else if (clean.match(/(day|week|month|hour)/)) {
+                        categories['Temporal Data'].push(sentence.trim());
+                    } else if (clean.match(/(fda|hipaa|osha|regulation|guideline)/i)) {
+                        categories['Regulatory References'].push(sentence.trim());
+                    } else {
+                        categories['Other Observations'].push(sentence.trim());
+                    }
+                });
+
+                return categories;
+            }
+
+            displayReport(report, outputPanel) {
+                const content = `
+                    <div class="space-y-8">
+                        <div class="text-center pt-4 pb-8 border-b border-white/20">
+                            <h2 class="text-3xl font-bold bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent mb-2">
+                                Expert Information Summary
+                            </h2>
+                            <div class="flex flex-wrap gap-4 justify-center text-sm text-gray-300 mb-4">
+                                <span><i class="fas fa-clock mr-1"></i>Generated: ${report.timestamp}</span>
+                                <span><i class="fas fa-file-alt mr-1"></i>${report.totalFacts} facts organized</span>
+                                <span><i class="fas fa-database mr-1"></i>${report.rawInputLength} characters processed</span>
+                            </div>
+                            <div class="safety-barrier py-2 px-4 rounded-xl inline-block font-semibold text-xs">
+                                <i class="fas fa-info-circle mr-1"></i>INFORMATIONAL SUMMARY ONLY - NO ADVICE GIVEN
+                            </div>
+                        </div>
+
+                        <div class="grid md:grid-cols-2 gap-6">
+                            ${this.renderCategory('Medications Identified', report.extracted.medications)}
+                            ${this.renderCategory('Dosages Found', report.extracted.dosages)}
+                            ${this.renderCategory('Symptoms/Effects', report.extracted.symptoms)}
+                            ${this.renderCategory('Regulatory References', report.extracted.regulations)}
+                        </div>
+
+                        <div class="space-y-4">
+                            <h3 class="text-xl font-bold flex items-center">
+                                <i class="fas fa-list text-blue-400 mr-3"></i>
+                                Categorized Fact Breakdown
+                            </h3>
+                            ${Object.entries(report.categories).map(([category, items]) => 
+                                items.length ? `
+                                    <div class="glass-effect p-5 rounded-2xl">
+                                        <h4 class="font-semibold text-lg mb-3 text-gray-100">${category}</h4>
+                                        <div class="space-y-2">
+                                            ${items.slice(0, 5).map(item => 
+                                                `<div class="p-3 bg-white/5 rounded-xl text-sm border-l-4 border-blue-400">
+                                                    "${item}"
+                                                </div>`
+                                            ).join('')}
+                                            ${items.length > 5 ? `<p class="text-xs text-gray-400 mt-2">+${items.length - 5} more facts in this category</p>` : ''}
+                                        </div>
+                                    </div>
+                                ` : ''
+                            ).join('')}
+                        </div>
+
+                        <div class="text-center p-8 safety-barrier rounded-3xl font-semibold">
+                            <i class="fas fa-shield-alt text-2xl mr-3"></i>
+                            <strong>SAFETY REMINDER:</strong> This is a neutral data organization tool. 
+                            All decisions require qualified professional review.
+                        </div>
+                    </div>
+                `;
+                document.getElementById('reportContent').innerHTML = content;
+            }
+
+            renderCategory(title, items) {
+                if (!items.length) return '';
+                return `
+                    <div class="glass-effect p-6 rounded-2xl">
+                        <h4 class="font-semibold mb-4 text-gray-100">${title}</h4>
+                        <div class="space-y-2">
+                            ${items.slice(0, 8).map(item => 
+                                `<div class="p-3 bg-white/10 rounded-xl text-sm border border-white/20">
+                                    ${item}
+                                </div>`
+                            ).join('')}
+                            ${items.length > 8 ? `<p class="text-xs text-gray-400 mt-2">+${items.length - 8} more items</p>` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+
+            showError(message) {
+                // Simple toast notification
+                const toast = document.createElement('div');
+                toast.className = 'fixed top-4 right-4 bg-red-500/90 backdrop-blur-sm text-white px-6 py-3 rounded-xl shadow-2xl z-50 fade-in';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                setTimeout(() => toast.remove(), 4000);
+            }
+        }
+
+        // Initialize the application
+        document.addEventListener('DOMContentLoaded', () => {
+            new SafetyFirstExpert();
+        });
+    </script>
+    <footer class="minimal-footer">
+        <div class="footer-content">
+            <h2>🤖 Safety-First Expert Portal</h2>
+            <p class="tagline">AI-Powered Writing Assistant</p>
+    
+            <div class="footer-details">
+                <p><strong>Team Leader:</strong> Ashutosh</p>
+                <p><strong>Developed by:</strong> Ashutosh & Himanshu (MCA)</p>
+            </div>
+    
+            <p class="copyright">
+                © 2026 Safety-First Expert Portal | All Rights Reserved
+            </p>
+        </div>
+    </footer>
+</body>
+</html>

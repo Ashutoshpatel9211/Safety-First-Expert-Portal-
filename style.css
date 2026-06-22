@@ -1,0 +1,69 @@
+.minimal-footer {
+    margin-top: 50px;
+    padding: 30px 20px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e5e7eb;
+}
+
+.minimal-footer h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.tagline {
+    font-size: 14px;
+    color: #cbd5f5;
+    margin-bottom: 15px;
+}
+
+.footer-details p {
+    margin: 4px 0;
+    font-size: 13px;
+}
+
+.copyright {
+    margin-top: 15px;
+    font-size: 12px;
+    color: #9ca3af;
+}.nav-link {
+    color: #e5e7eb;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #60a5fa;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -4px;
+    width: 0%;
+    height: 2px;
+    background: #60a5fa;
+    transition: 0.3s;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+.glass-effect:hover {
+    transform: translateY(-5px);
+    transition: 0.3s;
+}
+#statFacts, #statCategories, #statReports {
+    text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+.my-element {
+    display: inline-block;
+    margin: 0 0.5rem;
+  
+    animation: bounce; /* referring directly to the animation's @keyframe declaration */
+    animation-duration: 2s; /* don't forget to set a duration! */
+  }
